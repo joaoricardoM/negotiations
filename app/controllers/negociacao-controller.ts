@@ -21,6 +21,7 @@ export class negociacaoController {
         this.negociacoes.adiciona(negociacao);
         console.log(this.negociacoes.lista());
         this.limparFormulario();
+        this.negociacoesView.update(this.negociacoes);
     }
 
     criarNegociacao(): Negociacao {

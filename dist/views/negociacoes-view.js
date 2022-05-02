@@ -32,7 +32,7 @@ export class NegociacoesView {
         </table>
         `;
     }
-    template(model) {
+    update(model) {
         const template = this.template(model);
         console.log(template);
         this.elemento.innerHTML = template;
