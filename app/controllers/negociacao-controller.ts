@@ -26,7 +26,7 @@ export class negociacaoController {
             this.inputValor.value
         );
         if (!this.ehDiaUtil(negociacao.data)){
-            this.mensagemView.update('Apenas negociações em dias úteis são aceitas')
+            this.mensagemView.update('Apenas negociações em dias úteis são aceitas!')
             return;
         }
 
@@ -48,6 +48,6 @@ export class negociacaoController {
 
     private atulizaView(): void {
         this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update("Negociação adicionada com sucesso")
+        this.mensagemView.update("Negociação adicionada com sucesso!")
     }
 }
