@@ -1,27 +1,22 @@
-export abstract class View<T>{
+import { inspect } from "../decorators/inspect.js";
+import { logarTempodeExecucao } from "../decorators/logar-tempo-de-execucao.js";
+export abstract class View<T> {
+  protected element: HTMLElement;
 
-    protected element: HTMLElement;
-    private escapar = false;
-
-    constructor(seletor: string, escapar?: boolean) {
-        const element = document.querySelector(seletor); 
-        if(element){
-            this.element = element as HTMLElement;
-        } else{
-            throw Error ('Invalid')
-        }
-        if (escapar) {
-            this.escapar = escapar;
-        }
+  constructor(seletor: string) {
+    const element = document.querySelector(seletor);
+    if (element) {
+      this.element = element as HTMLElement;
+    } else {
+      throw Error("Invalid");
     }
+  }
 
-    public update (model: T): void {
-        let template = this.template(model);
-            if(this.escapar) {
-                template = template
-                .replace(/<script>[\s\S]*?<\/script>/,'');
-            }
-            this.element.innerHTML = template;
-    }
-        protected abstract template (model: T): string;
+  @logarTempodeExecucao(true)
+  @inspect
+  public update(model: T): void {
+    let template = this.template(model);
+    this.element.innerHTML = template;
+  }
+  protected abstract template(model: T): string;
 }
