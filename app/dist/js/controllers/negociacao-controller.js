@@ -14,28 +14,43 @@ import { MensagemView } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 export class negociacaoController {
     constructor() {
-        this.negociacoes = new Negociacoes;
-        this.negociacoesView = new NegociacoesView('#negociacoesView');
-        this.mensagemView = new MensagemView('#mensagemView');
+        this.negociacoes = new Negociacoes();
+        this.negociacoesView = new NegociacoesView("#negociacoesView");
+        this.mensagemView = new MensagemView("#mensagemView");
         this.negociacoesView.update(this.negociacoes);
     }
     adiciona() {
         const negociacao = Negociacao.criaDe(this.inputData.value, this.inputQuantidade.value, this.inputValor.value);
         if (!this.ehDiaUtil(negociacao.data)) {
-            this.mensagemView.update('Apenas negociações em dias úteis são aceitas!');
+            this.mensagemView.update("Apenas negociações em dias úteis são aceitas!");
             return;
         }
         this.negociacoes.adiciona(negociacao);
         this.limparFormulario();
         this.atulizaView();
     }
+    importarDados() {
+        fetch("http://localhost:8080/dados")
+            .then((res) => res.json())
+            .then((dados) => {
+            return dados.map((dadoHoje) => {
+                return new Negociacao(new Date(), dadoHoje.vezes, dadoHoje.montante);
+            });
+        })
+            .then((negociacoesDeHoje) => {
+            for (let negociacao of negociacoesDeHoje) {
+                this.negociacoes.adiciona(negociacao);
+            }
+            this.negociacoesView.update(this.negociacoes);
+        });
+    }
     ehDiaUtil(data) {
-        return data.getDay() > DiasSemana.DOMINGO && data.getDay() < DiasSemana.SABADO;
+        return (data.getDay() > DiasSemana.DOMINGO && data.getDay() < DiasSemana.SABADO);
     }
     limparFormulario() {
-        this.inputData.value = '';
-        this.inputQuantidade.value = '';
-        this.inputValor.value = '';
+        this.inputData.value = "";
+        this.inputQuantidade.value = "";
+        this.inputValor.value = "";
         this.inputData.focus();
     }
     atulizaView() {
@@ -44,13 +59,13 @@ export class negociacaoController {
     }
 }
 __decorate([
-    domInjector('#data')
+    domInjector("#data")
 ], negociacaoController.prototype, "inputData", void 0);
 __decorate([
-    domInjector('#quantidade')
+    domInjector("#quantidade")
 ], negociacaoController.prototype, "inputQuantidade", void 0);
 __decorate([
-    domInjector('#valor')
+    domInjector("#valor")
 ], negociacaoController.prototype, "inputValor", void 0);
 __decorate([
     inspect,

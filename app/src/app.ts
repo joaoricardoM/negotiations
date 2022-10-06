@@ -10,3 +10,12 @@ if(form){
 } else {
     throw Error ('Invalid')
 }
+
+const botaoImporta = document.querySelector('#botao-importar')
+    if(botaoImporta){
+          botaoImporta.addEventListener('click', () =>{
+            controller.importarDados();
+          });
+    } else {
+        throw Error ('Invalid import button')
+    }
