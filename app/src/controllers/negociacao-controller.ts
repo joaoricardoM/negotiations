@@ -2,8 +2,10 @@ import { domInjector } from "../decorators/dom-injector.js";
 import { inspect } from "../decorators/inspect.js";
 import { logarTempodeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiasSemana } from "../enums/dias-semana.js";
+import { negociacaoDia } from "../interfaces/negociacaoDia.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
+import { negociacoesService } from "../services/negociacoes-services.js";
 import { MensagemView } from "../views/mensagem-view.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 
@@ -17,6 +19,7 @@ export class negociacaoController {
   private negociacoes = new Negociacoes();
   private negociacoesView = new NegociacoesView("#negociacoesView");
   private mensagemView = new MensagemView("#mensagemView");
+  private negociacaoService = new negociacoesService();
 
   constructor() {
     this.negociacoesView.update(this.negociacoes);
@@ -36,24 +39,19 @@ export class negociacaoController {
     }
 
     this.negociacoes.adiciona(negociacao);
+    console.log(this.negociacoes.paraTexto());
+    console.log(negociacao.paraTexto());
     this.limparFormulario();
     this.atulizaView();
   }
 
   public importarDados(): void {
-    fetch("http://localhost:8080/dados")
-      .then((res) => res.json())
-      .then((dados: any[]) => {
-        return dados.map((dadoHoje) => {
-          return new Negociacao(new Date(), dadoHoje.vezes, dadoHoje.montante);
-        });
-      })
-      .then((negociacoesDeHoje) => {
-        for (let negociacao of negociacoesDeHoje) {
-          this.negociacoes.adiciona(negociacao);
-        }
-        this.negociacoesView.update(this.negociacoes);
-      });
+    this.negociacaoService.obterNegociacoesDia().then((negociacoesDeHoje) => {
+      for (let negociacao of negociacoesDeHoje) {
+        this.negociacoes.adiciona(negociacao);
+      }
+      this.negociacoesView.update(this.negociacoes);
+    });
   }
 
   private ehDiaUtil(data: Date) {
