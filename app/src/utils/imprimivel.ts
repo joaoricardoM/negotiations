@@ -1,3 +1,3 @@
-export abstract class imprimivel {
-    public abstract paraTexto(): string;
+export interface Imprimivel {
+     paraTexto(): string;
 }

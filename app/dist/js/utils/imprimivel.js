@@ -1,2 +1,1 @@
-export class imprimivel {
-}
+export {};
