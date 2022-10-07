@@ -21,4 +21,9 @@ export class Negociacao {
     paraTexto() {
         return `Data: ${this.data}, quantidade: ${this.quantidade}, valor: ${this.valor}`;
     }
+    ehIgual(negociacao) {
+        return this.data.getDate() === negociacao.data.getDate()
+            && this.data.getMonth() === negociacao.data.getMonth()
+            && this.data.getFullYear() === negociacao.data.getFullYear();
+    }
 }
