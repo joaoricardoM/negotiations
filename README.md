@@ -50,10 +50,10 @@ Comece realizando um clone deste projeto, se preferir você também pode baixar 
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/thiiagolourenco/Alura-Bank
+$ git clone https://github.com/joaoricardoM/negotiations.git
 
 # Acesse a pasta do projeto no seu terminal/cmd e abra o index.html no seu navegador
-$ cd Alura-Bank
+$ cd negotiations
 ```
 
 ## 📝 Licença
