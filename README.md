@@ -1,4 +1,4 @@
-<h1 align="center">Alura bank</h1>
+<h1 align="center">John's Bank</h1>
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
