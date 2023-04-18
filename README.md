@@ -28,7 +28,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-**Alura bank** - Plataforma online que permite os usuários a fazer negociações bancárias.
+**John's bank** - Plataforma online que permite os usuários a fazer negociações bancárias.
 
 ## 🚀 Como rodar o projeto
 
